@@ -26,61 +26,88 @@
     [a-zA-Z]{2,}: Two or more letters for the top-level domain.
     $: End of the string.
 **/
+const dataForm = document.querySelectorAll(".formData input");
+const firstName = document.getElementById('first');
+const lastName = document.getElementById('last');
+const email = document.getElementById('email');
+const dob = document.getElementById('birthdate').value;
+const quantity = document.getElementById('quantity');
+const tournament = document.querySelector('input[name="location"]:checked');
+const cgu = document.getElementById('checkbox1').checked;
+const errorMessages = {
+    empty: "Ce champ est obligatoire",
+    firstLastName: "Veuillez entrer 2 caractères minimum",
+    email: "Veuillez saisir une adresse email valide",
+    birthdate: "Vous devez entrer votre date de naissance.",
+    quantity: "Vous devez saisir un chiffre",
+    tournament: "Vous devez selectionner un tournoi",
+    cgu: "Vous devez accepter les conditions d'utilisation.",
+};
 
+// console.log(dataForm);
+// for(let i = 0 ; i < dataForm.length ; i++){
+//     console.log(dataForm[i].getAttribute('id'));
+//     if(dataForm[i].value === "" || dataForm[i].value === null){
+//         dataForm[i].parentNode.setAttribute('data-error', errorMessages.empty)
+//     }
+// }
 
 function validateForm() {
-    const firstName = document.getElementById('first').value.trim();
-    const lastName = document.getElementById('last').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const dob = document.getElementById('birthdate').value
-    const participations = document.getElementById('quantity').value;
-    const tournament = document.querySelector('input[name="location"]:checked');
-    const cgu = document.getElementById('checkbox1').checked;
-    const errorMessages = document.getElementById('errorMessages');
-
-    let errors = [];
-
+    event.preventDefault();
+    let errors = 0;
+    console.log (errors)
     // Validation du prénom (min. 2 lettres)
-    if (firstName.length < 2) {
-        errors.push("Le prénom doit contenir au moins 2 lettres.");
+    let firstNameLenght = firstName.value.trim()
+    if (firstNameLenght.length < 2) {
+        firstName.parentNode.setAttribute('data-error', errorMessages.firstLastName)
+        errors++
     }
 
     // Validation du nom (min. 2 lettres)
-    if (lastName.length < 2) {
-        errors.push("Le nom doit contenir au moins 2 lettres.");
+    let lastNameLenght = lastName.value.trim()
+    if (lastNameLenght.length < 2) {
+        lastName.parentNode.setAttribute('data-error', errorMessages.firstLastName)
+        errors++
     }
 
     // Validation de l'email avec regex
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
-        errors.push("L'adresse e-mail n'est pas valide.");
+    let emailValid = email.value.trim();
+    if (!emailRegex.test(emailValid)) {
+        email.parentNode.setAttribute('data-error', errorMessages.email)
+        errors++
     }
 
     // Validation de la date de naissance (champ type "date" au format YYYY-MM-DD)
-    if (dob === "") {
-        errors.push("La date de naissance est requise.");
+    let dobValid =dob.value;
+    if (dobValid === "") {
+        dob.parentNode.setAttribute('data-error', errorMessages.birthdate)
+        errors++
     }
 
     // Validation du nombre de participations (entre 0 et 99)
+    let participations = quantity.value;
     if (participations === "" || isNaN(participations) || participations < 0 || participations > 99) {
-        errors.push("Le nombre de participations doit être entre 0 et 99.");
+        quantity.parentNode.setAttribute('data-error', errorMessages.quantity)
+        errors++
     }
 
     // Validation du choix du tournoi (radio sélectionné)
-    if (!tournament) {
-        errors.push("Vous devez choisir un tournoi.");
-    }
+    // if (!tournament) {
+    //     tournament.parentNode.setAttribute('data-error', errorMessages.tournament)
+    //     errors++
+    // }
 
     // Validation de l'acceptation des CGU (checkbox cochée)
-    if (!cgu) {
-        errors.push("Vous devez accepter les CGU.");
-    }
-
+    // if (!cgu) {
+    //     cgu.parentNode.setAttribute('data-error', errorMessages.cgu)
+    //     errors++
+    // }
+    console.log('nbre erreur : '+errors)
     // Affichage des erreurs ou soumission du formulaire
-    if (errors.length > 0) {
-        errorMessages.innerHTML = errors.join('<br>');
+    if (errors > 0) {
         return false; // Empêche l'envoi du formulaire
     }
-
+    
     return true; // Le formulaire est valide
 }

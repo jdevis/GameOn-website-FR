@@ -54,9 +54,10 @@
 
       <div class="bground">
         <div class="content">
-          <span class="close"></span>
+          <span class="close btn-close"></span>
           <div class="modal-body">
             <form
+              id="signup"
               name="reserve"
               action="index.html"
               method="get"
@@ -70,8 +71,6 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
-                  required
                 /><br>
               </div>
               <div
@@ -82,8 +81,6 @@
                   type="text"
                   id="last"
                   name="last"
-                  minlength="2"
-                  required
                 /><br>
               </div>
               <div
@@ -94,7 +91,6 @@
                   type="email"
                   id="email"
                   name="email"
-                  required
                 /><br>
               </div>
               <div
@@ -105,7 +101,6 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required
                 /><br>
               </div>
               <div
@@ -211,7 +206,10 @@
                 value="C'est parti"
               />
             </form>
-            <p id="errorMessages" style="color:red;"></p>
+            <div class="hidden confirmation">
+              <p class="confirm-msg">Merci pour votre inscription</p>
+              <button class="btn-close btn-signup">Fermer</button>
+            </div>
           </div>
         </div>
       </div>
