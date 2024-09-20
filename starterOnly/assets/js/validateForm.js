@@ -1,17 +1,17 @@
-/*** Validate form ***/
+/** Retrieving datas **/
 
-const signup = document.getElementById('signup');
-const confirmation = document.getElementById('confirmation');
-const dataForm = document.querySelectorAll('.formData input');
-const firstName = document.getElementById('first');
-const lastName = document.getElementById('last');
-const email = document.getElementById('email');
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-const dob = document.getElementById('birthdate');
-const quantity = document.getElementById('quantity');
-const isTournament = document.getElementById('location1');
-const tournament = document.querySelectorAll('input[name="location"]');
-const cgu = document.getElementById('checkbox1');
+const signup = document.getElementById('signup')
+const confirmation = document.getElementById('confirmation')
+const dataForm = document.querySelectorAll('.formData input')
+const firstName = document.getElementById('first')
+const lastName = document.getElementById('last')
+const email = document.getElementById('email')
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+const dob = document.getElementById('birthdate')
+const quantity = document.getElementById('quantity')
+const isTournament = document.getElementById('location1')
+const tournament = document.querySelectorAll('input[name="location"]')
+const cgu = document.getElementById('checkbox1')
 const errorMessages = {
     empty: "Ce champ est obligatoire",
     firstLastName: "Veuillez entrer 2 caractères minimum",
@@ -20,111 +20,117 @@ const errorMessages = {
     quantity: "Veuillez saisir un chiffre entre 0 et 99",
     tournament: "Veuillez selectionner un tournoi",
     cgu: "Vous devez accepter les conditions d'utilisation",
-};
+}
 
- 
-// for(let i = 0 ; i < dataForm.length ; i++){
-//     console.log(dataForm[i].getAttribute('id'));
-//     if(dataForm[i].value === "" || dataForm[i].value === null){
-//         dataForm[i].parentNode.setAttribute('data-error', errorMessages.empty)
-//     }
-// }
+/** toggle class for error */
 
+function toggleClassError(item,message,bool){
+    
+    let attr = 'data-error'
+    let attrVisible = 'data-error-visible'
+
+    if (!bool || bool === 'false'){
+        item.parentNode.setAttribute(attr,message)
+        item.parentNode.setAttribute(attrVisible,true)
+    }
+    if (bool || bool === 'true'){
+        item.parentNode.removeAttribute(attr)
+        item.parentNode.removeAttribute(attrVisible)
+    }
+
+}
+
+/*** form validation ***/
 
 function validateForm(event) {
-    event.preventDefault();
-    let errors = 0; // count numbers of error 
+    event.preventDefault()
+    let errors = 0 // count numbers of error 
 
-    // Validation du prénom (min. 2 lettres)
+    // Empty field
+    for(let i = 0 ; i < dataForm.length ; i++){
+       // console.log('form item : ' +dataForm[i].value);
+        // if(dataForm[i].value === "" || dataForm[i].value === null){
+        //     dataForm[i].parentNode.setAttribute('data-error', errorMessages.empty)
+        // }
+    }
+    
+    // Name  (min. 2 letters)
     let firstNameLenght = firstName.value.trim()
     if (firstNameLenght.length < 2) {
-        firstName.parentNode.setAttribute('data-error', errorMessages.firstLastName)
-        firstName.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(firstName, errorMessages.firstLastName, false)
         errors++
     }else{
-        firstName.parentNode.removeAttribute('data-error')
-        firstName.parentNode.removeAttribute('data-error-visible')
+        toggleClassError(firstName, errorMessages.firstLastName, true)
     }
 
-    // Validation du nom (min. 2 lettres)
+    // Lastname  (min. 2 letters)
     let lastNameLenght = lastName.value.trim()
     if (lastNameLenght.length < 2) {
-        lastName.parentNode.setAttribute('data-error', errorMessages.firstLastName)
-        lastName.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(lastName, errorMessages.firstLastName, false)
         errors++
     }else{
-        lastName.parentNode.removeAttribute('data-error')
-        lastName.parentNode.removeAttribute('data-error-visible')
+        toggleClassError(lastName, errorMessages.firstLastName, true)
     }
 
-    // Validation de l'email avec regex
-    let emailValid = email.value.trim();
+    // Email 
+    let emailValid = email.value.trim()
     if (!emailRegex.test(emailValid)) {
-        email.parentNode.setAttribute('data-error', errorMessages.email)
-        email.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(email, errorMessages.email, false)
         errors++
     }else{
-        email.parentNode.removeAttribute('data-error')
-        email.parentNode.removeAttribute('data-error-visible')
+        toggleClassError(email, errorMessages.email, true)
     }
 
-    // Validation de la date de naissance (champ type "date" au format YYYY-MM-DD)
+    // Birthdate 
     let dobValid = dob.value;
     if (dobValid === "") {
-        dob.parentNode.setAttribute('data-error', errorMessages.birthdate)
-        dob.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(dob, errorMessages.birthdate, false)
         errors++
     }else{
-        dob.parentNode.removeAttribute('data-error')
-        dob.parentNode.removeAttribute('data-error-visible')
+        toggleClassError(dob, errorMessages.birthdate, true)
     }
 
-    // Validation du nombre de participations (entre 0 et 99)
+    // Number of participations ( min 0, max 99)
     let participations = quantity.value;
     if (participations === "" || isNaN(participations) || participations < 0 || participations > 99) {
-        quantity.parentNode.setAttribute('data-error', errorMessages.quantity)
-        quantity.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(quantity, errorMessages.quantity, false)
         errors++
     }else{
-        quantity.parentNode.removeAttribute('data-error');
-        quantity.parentNode.removeAttribute('data-error-visible');
+        toggleClassError(quantity, errorMessages.quantity, true)
     }
 
-    // Validation du choix du tournoi (radio sélectionné)
+    // Tournaments
     let selected = false;
-    // Vérifie si un des boutons est sélectionné
+    // input radio checked
     for (let i = 0; i < tournament.length; i++) {
         if (tournament[i].checked) {
             selected = true;
         }
     }
     if (!selected){
-        isTournament.parentNode.setAttribute('data-error', errorMessages.tournament)
-        isTournament.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(isTournament, errorMessages.tournament, false)
         errors++
     }
     if(selected){
-        isTournament.parentNode.removeAttribute('data-error')
-        isTournament.parentNode.removeAttribute('data-error-visible')
+        toggleClassError(isTournament, errorMessages.tournament, true)
     }
 
-    // Validation de l'acceptation des CGU (checkbox cochée)
+    // CGU
     if (!cgu.checked) {
-        cgu.parentNode.setAttribute('data-error', errorMessages.cgu)
-        cgu.parentNode.setAttribute('data-error-visible', true)
+        toggleClassError(cgu, errorMessages.cgu, false)
         errors++
     }else{
-        cgu.parentNode.removeAttribute('data-error')
-        cgu.parentNode.removeAttribute('data-error-visible')
+        toggleClassError(cgu, errorMessages.cgu, true)
     }
 
-    // Affichage des erreurs ou soumission du formulaire
+    // Number of error
     if (errors > 0) {
-        return false; // Empêche l'envoi du formulaire
+        return false
     }
 
-    confirmation.classList.remove('hidden');
-    signup.classList.add('hidden');
-    return true; // Le formulaire est valide
+    confirmation.classList.remove('hidden'); // show confirmation
+    signup.classList.add('hidden'); // hide form
+    return true;
 }
+
 signup.addEventListener('submit',validateForm)
