@@ -14,7 +14,6 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  /* background-image: url("background.png"); MISSING IMG */
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
@@ -51,7 +50,11 @@ img {
   font-size: 20px;
   font-family: Roboto, sans-serif;
 }
-.hidden{
+.hidden *{
+  display: none;
+}
+.hidden .btn-signup,
+.hidden .btn-submit{
   display: none;
 }
 .topnav a:hover {
@@ -188,6 +191,7 @@ main {
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
+  min-height: 600px;
 }
 
 label {
@@ -196,6 +200,7 @@ label {
   font-weight: normal;
   display: inline-block;
   margin-bottom: 11px;
+  margin-top: 11px;
 }
 input {
   padding: 8px;
@@ -218,9 +223,7 @@ input {
   margin-top: 7px;
   margin-bottom: 7px;
   text-align: left;
-  line-height: 0.3;
-  opacity: 1;
-  transition: 0.3s;
+  opacity: 0;
 }
 .formData[data-error-visible="true"]::after {
   opacity: 1;
@@ -335,6 +338,24 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+/* signin confirmation */
+#confirmation {
+  display: flex;
+  justify-content: center;
+}
+#confirmation p {
+  position: absolute;
+  top: 33%;
+  font-size: 2em;
+  text-align: center;
+}
+#confirmation button {
+  width: 150px;
+  font-size: 14px;
+  position: absolute;
+  bottom: 5%;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;

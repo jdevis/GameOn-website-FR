@@ -61,7 +61,6 @@
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validateForm();"
             >
               <div
                 class="formData">
@@ -185,14 +184,14 @@
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
-                  checked
+                  name="cgu"
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" />
+                <input class="checkbox-input" type="checkbox" id="checkbox2" name="notif" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
@@ -206,7 +205,7 @@
                 value="C'est parti"
               />
             </form>
-            <div class="hidden confirmation">
+            <div id="confirmation" class="hidden">
               <p class="confirm-msg">Merci pour votre inscription</p>
               <button class="btn-close btn-signup">Fermer</button>
             </div>
