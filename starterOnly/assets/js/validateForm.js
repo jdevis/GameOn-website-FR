@@ -1,15 +1,15 @@
 /** Retrieving datas **/
 
-const signup = document.getElementById('signup')
-const confirmation = document.getElementById('confirmation')
-const dataForm = document.querySelectorAll('.formData input')
+const signup = document.getElementById('signup') // form id
+const confirmation = document.getElementById('confirmation') // confirmation step id
+const dataForm = document.querySelectorAll('.formData input') 
 const firstName = document.getElementById('first')
 const lastName = document.getElementById('last')
 const email = document.getElementById('email')
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 const dob = document.getElementById('birthdate')
 const quantity = document.getElementById('quantity')
-const isTournament = document.getElementById('location1')
+const isTournament = document.getElementById('location1') // for parentNode of radio buttons
 const tournament = document.querySelectorAll('input[name="location"]')
 const cgu = document.getElementById('checkbox1')
 const errorMessages = {
@@ -47,12 +47,12 @@ function validateForm(event) {
     let errors = 0 // count numbers of error 
 
     // Empty field
-    for(let i = 0 ; i < dataForm.length ; i++){
-       // console.log('form item : ' +dataForm[i].value);
-        // if(dataForm[i].value === "" || dataForm[i].value === null){
-        //     dataForm[i].parentNode.setAttribute('data-error', errorMessages.empty)
-        // }
-    }
+    // for(let i = 0 ; i < dataForm.length ; i++){
+    //     console.log("checked ? : "+dataForm[i].checked)
+    //     if(dataForm[i].value === "" || dataForm[i].value === null){
+    //         toggleClassError(dataForm[i], errorMessages.empty, false)
+    //     }
+    // }
     
     // Name  (min. 2 letters)
     let firstNameLenght = firstName.value.trim()

@@ -346,8 +346,9 @@ input[data-error]::after {
 #confirmation p {
   position: absolute;
   top: 33%;
-  font-size: 2em;
+  font-size: 1.5em;
   text-align: center;
+  padding: 0 1em;
 }
 #confirmation button {
   width: 150px;
