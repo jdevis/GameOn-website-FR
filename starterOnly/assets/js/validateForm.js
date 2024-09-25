@@ -30,8 +30,7 @@ function toggleClassError(item, message, bool) {
 	if (!bool || bool === "false") {
 		item.parentNode.setAttribute(attr, message);
 		item.parentNode.setAttribute(attrVisible, true);
-	}
-	if (bool || bool === "true") {
+	} else {
 		item.parentNode.removeAttribute(attr);
 		item.parentNode.removeAttribute(attrVisible);
 	}
