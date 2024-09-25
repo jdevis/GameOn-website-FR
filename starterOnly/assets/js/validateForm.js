@@ -13,7 +13,6 @@ const isTournament = document.getElementById('location1') // for parentNode of r
 const tournament = document.querySelectorAll('input[name="location"]')
 const cgu = document.getElementById('checkbox1')
 const errorMessages = {
-    empty: "Ce champ est obligatoire",
     firstLastName: "Veuillez entrer 2 caractères minimum",
     email: "Veuillez saisir une adresse email valide",
     birthdate: "Veuillez entrer votre date de naissance.",
@@ -43,17 +42,10 @@ function toggleClassError(item,message,bool){
 /*** form validation ***/
 
 function validateForm(event) {
+    
     event.preventDefault()
     let errors = 0 // count numbers of error 
 
-    // Empty field
-    // for(let i = 0 ; i < dataForm.length ; i++){
-    //     console.log("checked ? : "+dataForm[i].checked)
-    //     if(dataForm[i].value === "" || dataForm[i].value === null){
-    //         toggleClassError(dataForm[i], errorMessages.empty, false)
-    //     }
-    // }
-    
     // Name  (min. 2 letters)
     let firstNameLenght = firstName.value.trim()
     if (firstNameLenght.length < 2) {
