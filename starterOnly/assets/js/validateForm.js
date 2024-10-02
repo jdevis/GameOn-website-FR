@@ -5,6 +5,7 @@ const confirmation = document.getElementById("confirmation"); // confirmation st
 const dataForm = document.querySelectorAll(".formData input");
 const firstName = document.getElementById("first");
 const lastName = document.getElementById("last");
+const textRegex = /^[a-zA-Z]{2,}$/;
 const email = document.getElementById("email");
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const dob = document.getElementById("birthdate");
@@ -63,7 +64,7 @@ function validateForm(event) {
 
 	// Name  (min. 2 letters)
 	let firstNameLenght = firstName.value.trim();
-	if (firstNameLenght.length < 2 || firstNameLenght !== NaN) {
+	if (!textRegex.test(firstNameLenght)) {
 		toggleClassError(firstName, errorMessages.firstLastName, false);
 		errors++;
 	} else {
@@ -72,7 +73,7 @@ function validateForm(event) {
 
 	// Lastname  (min. 2 letters)
 	let lastNameLenght = lastName.value.trim();
-	if (lastNameLenght.length < 2 || lastNameLenght !== NaN) {
+	if (!textRegex.test(lastNameLenght)) {
 		toggleClassError(lastName, errorMessages.firstLastName, false);
 		errors++;
 	} else {

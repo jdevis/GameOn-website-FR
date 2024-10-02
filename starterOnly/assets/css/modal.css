@@ -505,11 +505,19 @@ footer {
 	margin: 0 20px;
 }
 @media screen and (max-width: 800px) {
+	body {
+		margin: 2em;
+	}
+	.topnav {
+		margin: 0;
+	}
 	main {
-		margin-bottom: 0;
+		margin: 0;
+		padding: 0;
 	}
 	.header-logo img {
-		width: 50%;
+		width: 43%;
+		padding-right: 0;
 	}
 	.hero-section {
 		display: block;
@@ -519,7 +527,7 @@ footer {
 	.hero-content {
 		background: #fff;
 		color: #000;
-		padding: 10px;
+		padding: 10px 0;
 		min-width: 100%;
 	}
 	.hero-content::after {
@@ -529,13 +537,14 @@ footer {
 		display: none;
 	}
 	.hero-headline {
-		font-size: 1.5rem;
+		font-size: 40px;
+		font-weight: bold;
 		white-space: normal;
 	}
 	.hero-text {
-		width: 80%;
+		width: 100%;
 		margin-top: 10px;
-		font-size: 0.75rem;
+		font-size: 13px;
 	}
 	.hero-img img {
 		border-radius: 10px;
@@ -544,12 +553,31 @@ footer {
 	.hero-section > .btn-signup {
 		display: block;
 		margin: 15px auto 10px;
-		padding: 12px 35px;
+		padding: 10px 35px;
+		font-size: 14px;
+		width: 50%;
 	}
 	.copyrights {
 		margin-top: 15px;
 		text-align: center;
-		font-size: 0.75em;
+		font-size: 10px;
+	}
+	.formData[data-error]::after {
+		font-size: 14px;
+	}
+	.checkbox-label,
+	.checkbox2-label {
+		margin-left: 27px;
+	}
+	.checkbox-label .checkbox-icon,
+	.checkbox2-label .checkbox-icon {
+		left: -25px;
+	}
+	.btn-submit,
+	.btn-signup {
+		margin-top: 15px;
+		font-size: 14px;
+		padding: 12px 50px;
 	}
 }
 
