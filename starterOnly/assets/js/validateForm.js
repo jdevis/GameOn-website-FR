@@ -15,7 +15,8 @@ const cgu = document.getElementById("checkbox1");
 const errorMessages = {
 	firstLastName: "Veuillez entrer 2 caractères minimum",
 	email: "Veuillez saisir une adresse email valide",
-	birthdate: "Veuillez entrer votre date de naissance.",
+	birthdate: "Veuillez entrer votre date de naissance",
+	legalAge: "Vous devez être majeur",
 	quantity: "Veuillez saisir un chiffre entre 0 et 99",
 	tournament: "Veuillez selectionner un tournoi",
 	cgu: "Vous devez accepter les conditions d'utilisation",
@@ -36,6 +37,24 @@ function toggleClassError(item, message, bool) {
 	}
 }
 
+/** legal age **/
+function validateBirthDate(inputDate) {
+	const currentDate = new Date();
+	const userDate = new Date(inputDate);
+
+	// Check if userDate is a valid date and is not in the future
+	if (isNaN(userDate) || userDate > currentDate) {
+		return false;
+	}
+	// Ensure the user is at least 18 years old
+	const minAgeDate = new Date();
+	minAgeDate.setFullYear(minAgeDate.getFullYear() - 18);
+	if (userDate > minAgeDate) {
+		return false;
+	}
+	return true;
+}
+
 /*** form validation ***/
 
 function validateForm(event) {
@@ -44,7 +63,8 @@ function validateForm(event) {
 
 	// Name  (min. 2 letters)
 	let firstNameLenght = firstName.value.trim();
-	if (firstNameLenght.length < 2) {
+	console.log(firstName.value);
+	if (firstNameLenght.length < 2 || firstNameLenght !== NaN) {
 		toggleClassError(firstName, errorMessages.firstLastName, false);
 		errors++;
 	} else {
@@ -53,7 +73,7 @@ function validateForm(event) {
 
 	// Lastname  (min. 2 letters)
 	let lastNameLenght = lastName.value.trim();
-	if (lastNameLenght.length < 2) {
+	if (lastNameLenght.length < 2 || lastNameLenght !== NaN) {
 		toggleClassError(lastName, errorMessages.firstLastName, false);
 		errors++;
 	} else {
@@ -73,6 +93,10 @@ function validateForm(event) {
 	let dobValid = dob.value;
 	if (dobValid === "") {
 		toggleClassError(dob, errorMessages.birthdate, false);
+		errors++;
+	}
+	if (!validateBirthDate(dobValid)) {
+		toggleClassError(dob, errorMessages.legalAge, false);
 		errors++;
 	} else {
 		toggleClassError(dob, errorMessages.birthdate, true);
