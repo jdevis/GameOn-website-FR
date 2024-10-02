@@ -63,7 +63,6 @@ function validateForm(event) {
 
 	// Name  (min. 2 letters)
 	let firstNameLenght = firstName.value.trim();
-	console.log(firstName.value);
 	if (firstNameLenght.length < 2 || firstNameLenght !== NaN) {
 		toggleClassError(firstName, errorMessages.firstLastName, false);
 		errors++;
